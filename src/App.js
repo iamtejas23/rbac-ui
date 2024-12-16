@@ -1,25 +1,20 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import UserManagement from './components/UserManagement';
-import RoleManagement from './components/RoleManagement';
-import PermissionManagement from './components/PermissionManagement';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import UserManagement from './pages/UserManagement';
+import RoleManagement from './pages/RoleManagement';
 
 function App() {
-  const [selectedTab, setSelectedTab] = React.useState('Users');
-
   return (
-    <div className="flex h-screen">
-      <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      <div className="flex flex-col w-full">
-        <Navbar />
-        <div className="p-4">
-          {selectedTab === 'Users' && <UserManagement />}
-          {selectedTab === 'Roles' && <RoleManagement />}
-          {selectedTab === 'Permissions' && <PermissionManagement />}
-        </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/users" element={<UserManagement />} />
+          <Route path="/roles" element={<RoleManagement />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
